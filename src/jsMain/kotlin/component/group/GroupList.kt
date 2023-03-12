@@ -18,17 +18,17 @@ val CGroupList = FC<GroupListProps>("GroupList") { props ->
     ol {
         css {
             display = Display.flex
+            justifyContent = JustifyContent.center
+            alignItems = AlignItems.center
             boxShadow = BoxShadow(0.px, 0.px, 6.px, rgba(32, 33, 36, 0.28))
             background = rgb(255, 255, 255);
-            borderRadius = 35.px;
+            borderRadius = 24.px;
             padding = 10.px
-            alignItems = AlignItems.center
-            justifyContent = JustifyContent.center
             listStyleType = None.none
             flexWrap = FlexWrap.wrap
             maxWidth = 40.pct
             minWidth = 450.px
-            margin = Auto.auto
+            margin = Margin(10.px, Auto.auto)
         }
         props.groups.forEach { groupItem ->
             Link {
@@ -39,6 +39,7 @@ val CGroupList = FC<GroupListProps>("GroupList") { props ->
                     margin = 5.px
                 }
 
+                to = groupItem
 
                 li {
                     css {

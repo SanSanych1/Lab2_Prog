@@ -19,5 +19,18 @@ fun Route.groupRoutes() {
                 call.respond(groups)
             }
         }
+        get ("{id}"){
+            val id =
+                call.parameters["id"] ?: return@get call.respondText(
+                    "Missing or malformed id",
+                    status = HttpStatusCode.BadRequest
+                )
+            val students = studentsRepo.read().filter { it.elem.group == id }
+            if (students.isEmpty()) {
+                call.respondText("No students found", status = HttpStatusCode.NotFound)
+            } else {
+                call.respond(students)
+            }
+        }
     }
 }

@@ -8,12 +8,20 @@ import react.dom.html.ReactHTML.span
 import react.useState
 import com.sovostyanov.application.common.Item
 import com.sovostyanov.application.common.ItemId
+import com.sovostyanov.application.config.Config
 import com.sovostyanov.application.data.Student
 import csstype.*
 import emotion.css.css
 import emotion.react.css
+import history.LocationState
+import history.To
+import react.create
 import react.dom.html.ReactHTML.div
+import react.router.PathRouteProps
+import react.router.Route
 import react.router.dom.Link
+import react.router.dom.NavLink
+import react.router.useParams
 
 external interface QueryError
 
@@ -28,6 +36,8 @@ val CStudentList = FC<StudentListProps>("StudentList") { props ->
     ol {
         css {
             display = Display.flex
+            justifyContent = JustifyContent.center
+            alignItems = AlignItems.center
             boxShadow = BoxShadow(0.px, 0.px, 6.px, rgba(32, 33, 36, 0.28))
             background = rgb(255, 255, 255);
             borderRadius = 24.px;
@@ -36,7 +46,7 @@ val CStudentList = FC<StudentListProps>("StudentList") { props ->
             flexWrap = FlexWrap.wrap
             maxWidth = 40.pct
             minWidth = 450.px
-            margin = Auto.auto
+            margin = Margin(10.px, Auto.auto)
         }
         props.students.forEach { studentItem ->
             Link {
@@ -47,7 +57,8 @@ val CStudentList = FC<StudentListProps>("StudentList") { props ->
                     padding = 0.px
                     margin = 5.px
                 }
-
+                replace = true
+                to = "/${Config.studentsPath}${studentItem.id}"
 
                 li {
                     css {

@@ -1,4 +1,4 @@
-package component.group
+package component
 
 import com.sovostyanov.application.config.Config
 import component.student.QueryError
@@ -19,20 +19,18 @@ val CMenu = FC("Menu") { _: Props ->
         css {
             display = Display.flex
             background = rgb(255, 255, 255)
-            padding = 10.px
             alignItems = AlignItems.center
             justifyContent = JustifyContent.center
-            width = 100.pct
+            margin = Margin(10.px, Auto.auto)
         }
         Link{
             css {
                 display = Display.block
                 textDecoration = None.none
-                padding = 0.px
                 border = Border(1.px, LineStyle.solid, Color("#dfe1e5"))
                 borderRadius = 35.px;
                 minWidth = (1/3).pct
-                margin = 5.px
+                margin = Margin(0.px,10.px)
                 padding = 10.px
             }
             +"Students"
@@ -42,11 +40,10 @@ val CMenu = FC("Menu") { _: Props ->
             css {
                 display = Display.block
                 textDecoration = None.none
-                padding = 0.px
                 border = Border(1.px, LineStyle.solid, Color("#dfe1e5"))
                 borderRadius = 35.px;
                 minWidth = (1/3).pct
-                margin = 5.px
+                margin = Margin(0.px,10.px)
                 padding = 10.px
             }
             +"Groups"
