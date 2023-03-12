@@ -17,29 +17,22 @@ external interface EditStudentProps : Props {
 val CEditStudent = FC<EditStudentProps>("Edit student") { props ->
     val firstnameRef = useRef<HTMLInputElement>()
     val surnameRef = useRef<HTMLInputElement>()
-    val groupRef = useRef<HTMLInputElement>()
-    span {
-        input {
-            defaultValue = props.oldStudent.firstname
-            ref = firstnameRef
-        }
-        input {
-            defaultValue = props.oldStudent.surname
-            ref = surnameRef
-        }
-        input {
-            defaultValue = props.oldStudent.group
-            ref = groupRef
-        }
+
+    input {
+        defaultValue = props.oldStudent.firstname
+        ref = firstnameRef
     }
+    input {
+        defaultValue = props.oldStudent.surname
+        ref = surnameRef
+    }
+
     ReactHTML.button {
         +"✓"
         onClick = {
             firstnameRef.current?.value?.let { firstname ->
                 surnameRef.current?.value?.let { surname ->
-                    groupRef.current?.value?.let { group ->
-                        props.saveStudent(Student(firstname, surname, group))
-                    }
+                    props.saveStudent(Student(firstname, surname, props.oldStudent.group))
                 }
             }
         }

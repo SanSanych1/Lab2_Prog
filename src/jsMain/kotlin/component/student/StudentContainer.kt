@@ -90,11 +90,11 @@ val studentContainer = FC("StudentsContainer") { _: Props ->
     else {
         val items =
             Json.decodeFromString<Array<Item<Student>>>(query.data ?: "")
-        CAddStudent {
-            addStudent = {
-                addStudentMutation.mutateAsync(it, null)
-            }
-        }
+//        CAddStudent {
+//            addStudent = {
+//                addStudentMutation.mutateAsync(it, null)
+//            }
+//        }
         CStudentList {
             students = items
             deleteStudent = {
