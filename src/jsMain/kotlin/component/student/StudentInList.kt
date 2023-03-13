@@ -19,28 +19,24 @@ external interface StudentInListProps : Props {
 }
 
 val CStudentInList = FC<StudentInListProps>("StudentInList") { props ->
-    div{
+
+    span {
         css {
-            display = Display.flex
-            alignItems = AlignItems.center
+            margin = Margin(0.px, 5.px)
         }
-        span {
-            css {
-                margin = Margin(0.px, 5.px)
-            }
-            +props.student.firstname
+        +props.student.firstname
+    }
+    span {
+        css {
+            margin = Margin(0.px, 5.px)
         }
-        span {
-            css {
-                margin = Margin(0.px, 5.px)
-            }
-            +props.student.surname
+        +props.student.surname
+    }
+    span {
+        css {
+            margin = Margin(0.px, 5.px)
         }
-        span {
-            css {
-                margin = Margin(0.px, 5.px)
-            }
-            +props.student.group
-        }
+        +props.student.group
+
     }
 }

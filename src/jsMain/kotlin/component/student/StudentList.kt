@@ -49,16 +49,14 @@ val CStudentList = FC<StudentListProps>("StudentList") { props ->
             margin = Margin(10.px, Auto.auto)
         }
         props.students.forEach { studentItem ->
-            Link {
+            div {
                 css {
                     display = Display.block
                     width = 100.pct
-                    textDecoration = None.none
                     padding = 0.px
                     margin = 5.px
                 }
-                replace = true
-                to = "/${Config.studentsPath}${studentItem.id}"
+
 
                 li {
                     css {
@@ -78,9 +76,21 @@ val CStudentList = FC<StudentListProps>("StudentList") { props ->
                             }
                         }
                     else
-                        CStudentInList {
-                            student = studentItem.elem
+                        Link{
+                            css{
+                                display = Display.flex
+                                alignItems = AlignItems.center
+                                textDecoration = None.none
+                                lineHeight = 30.px
+                            }
+                            replace = true
+                            to = "/${Config.studentsPath}${studentItem.id}"
+
+                            CStudentInList {
+                                student = studentItem.elem
+                            }
                         }
+
                     div {
                         css {
                             display = Display.flex
