@@ -1,16 +1,13 @@
-import com.sovostyanov.application.common.Item
 import com.sovostyanov.application.config.Config
-import com.sovostyanov.application.data.Student
 import component.CMenu
-import component.group.groupContainer
-import component.student.CStudent
-import component.student.studentContainer
-import component.student.studentsContainer
+import component.group.item.groupContainer
+import component.menuContainer
+import component.student.item.studentContainer
+import component.student.list.studentsContainer
 import react.FC
 import react.Props
 import react.create
 import react.dom.client.createRoot
-import react.dom.html.ReactHTML.p
 import react.router.Route
 import react.router.Routes
 import react.router.dom.HashRouter
@@ -27,7 +24,7 @@ val app = FC<Props> ("App"){
     HashRouter{
         QueryClientProvider {
             client = QueryClient()
-            CMenu()
+            menuContainer()
             Routes{
                 Route{
                     path = Config.studentsPath

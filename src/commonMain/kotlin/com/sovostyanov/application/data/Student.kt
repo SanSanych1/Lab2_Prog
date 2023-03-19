@@ -13,6 +13,7 @@ class Student(
 ){
     fun fullname() =
         "$firstname $surname"
+
 }
 
 typealias StudentId = ItemId

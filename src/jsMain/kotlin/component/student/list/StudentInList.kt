@@ -1,4 +1,4 @@
-package component.student
+package component.student.list
 
 import react.FC
 import react.Props
@@ -9,10 +9,7 @@ import csstype.Display
 import csstype.Margin
 import csstype.px
 import emotion.react.css
-import react.dom.html.ReactHTML
 import react.dom.html.ReactHTML.div
-import react.dom.html.ReactHTML.p
-import react.router.dom.Link
 
 external interface StudentInListProps : Props {
     var student: Student

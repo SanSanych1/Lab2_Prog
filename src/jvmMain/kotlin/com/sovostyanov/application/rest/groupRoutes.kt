@@ -11,6 +11,7 @@ import com.sovostyanov.application.repo.studentsRepo
 
 fun Route.groupRoutes() {
     route(Config.groupsPath) {
+        // Получение всех групп
         get {
             val groups = studentsRepo.read().map { it.elem.group }.toSet()
             if (groups.isEmpty()) {
@@ -19,13 +20,46 @@ fun Route.groupRoutes() {
                 call.respond(groups)
             }
         }
-        get ("{id}"){
-            val id =
-                call.parameters["id"] ?: return@get call.respondText(
+
+        // Получение списка студентов
+        get ("{group}"){
+            val group =
+                call.parameters["group"] ?: return@get call.respondText(
                     "Missing or malformed id",
                     status = HttpStatusCode.BadRequest
                 )
+            val students = studentsRepo.read().filter { it.elem.group == group }
+            print(students)
+            if (students.isEmpty()) {
+                call.respondText("No students found", status = HttpStatusCode.NotFound)
+            } else {
+                call.respond(students)
+            }
+        }
+
+        // Получение списка студентов
+        get{
+            val id = call.request.queryParameters["group"] ?: return@get call.respondText(
+                "Missing or malformed id",
+                status = HttpStatusCode.BadRequest
+            )
             val students = studentsRepo.read().filter { it.elem.group == id }
+            if (students.isEmpty()) {
+                call.respondText("No students found", status = HttpStatusCode.NotFound)
+            } else {
+                call.respond(students)
+            }
+        }
+
+        // Получение списка студентов
+        get{
+            val id = call.receive<String>()
+            if (id.isEmpty())
+                return@get call.respondText(
+                    "Missing or malformed id",
+                    status = HttpStatusCode.BadRequest
+                )
+            val students = studentsRepo.read().filter { it.elem.group == id.substring(1, id.length-1) }
             if (students.isEmpty()) {
                 call.respondText("No students found", status = HttpStatusCode.NotFound)
             } else {

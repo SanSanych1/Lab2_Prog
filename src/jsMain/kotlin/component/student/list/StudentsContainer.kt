@@ -1,8 +1,7 @@
-package component.student
+package component.student.list
 
 import js.core.jso
 import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import react.FC
 import react.Props
@@ -20,7 +19,6 @@ import tanstack.react.query.useQueryClient
 import tools.HTTPResult
 import tools.fetch
 import tools.fetchText
-import kotlin.js.json
 
 external interface StudentsContainerProps : Props {
     var searchByGroup: Boolean
@@ -28,47 +26,43 @@ external interface StudentsContainerProps : Props {
 
 val studentsContainer = FC<StudentsContainerProps>("StudentsContainer") { props ->
     val queryClient = useQueryClient()
-
-
+    val groupId = useParams()["name"]
     val studentListQueryKey = arrayOf("studentList").unsafeCast<QueryKey>()
 
     val query =
-        if(!props.searchByGroup){
+        if(!props.searchByGroup)
             useQuery<String, QueryError, String, QueryKey>(
                 queryKey = studentListQueryKey,
                 queryFn = {
                     fetchText(Config.studentsPath)
                 }
             )
-        }
         else
-        {
-            val groupId = useParams()["name"]
             useQuery<String, QueryError, String, QueryKey>(
                 queryKey = studentListQueryKey,
                 queryFn = {
                     fetchText(Config.groupsPath + groupId)
                 }
             )
-        }
 
-    val addStudentMutation = useMutation<HTTPResult, Any, Student, Any>(
-        mutationFn = { student: Student ->
-            fetch(
-                Config.studentsPath,
-                jso {
-                    method = "POST"
-                    headers = json("Content-Type" to "application/json")
-                    body = Json.encodeToString(student)
-                }
-            )
-        },
-        options = jso {
-            onSuccess = { _: Any, _: Any, _: Any? ->
-                queryClient.invalidateQueries<Any>(studentListQueryKey)
-            }
-        }
-    )
+
+//    val addStudentMutation = useMutation<HTTPResult, Any, Student, Any>(
+//        mutationFn = { student: Student ->
+//            fetch(
+//                Config.studentsPath,
+//                jso {
+//                    method = "POST"
+//                    headers = json("Content-Type" to "application/json")
+//                    body = Json.encodeToString(student)
+//                }
+//            )
+//        },
+//        options = jso {
+//            onSuccess = { _: Any, _: Any, _: Any? ->
+//                queryClient.invalidateQueries<Any>(studentListQueryKey)
+//            }
+//        }
+//    )
 
     val deleteStudentMutation = useMutation<HTTPResult, Any, ItemId, Any>(
         { studentId: ItemId ->
@@ -87,23 +81,23 @@ val studentsContainer = FC<StudentsContainerProps>("StudentsContainer") { props 
         }
     )
 
-    val updateStudentMutation = useMutation<HTTPResult, Any, Item<Student>, Any>(
-        mutationFn = { studentItem: Item<Student> ->
-            fetch(
-                "${Config.studentsPath}${studentItem.id}",
-                jso {
-                    method = "PUT"
-                    headers = json("Content-Type" to "application/json")
-                    body = Json.encodeToString(studentItem.elem)
-                }
-            )
-        },
-        options = jso {
-            onSuccess = { _: Any, _: Any, _: Any? ->
-                queryClient.invalidateQueries<Any>(studentListQueryKey)
-            }
-        }
-    )
+//    val updateStudentMutation = useMutation<HTTPResult, Any, Item<Student>, Any>(
+//        mutationFn = { studentItem: Item<Student> ->
+//            fetch(
+//                "${Config.studentsPath}${studentItem.id}",
+//                jso {
+//                    method = "PUT"
+//                    headers = json("Content-Type" to "application/json")
+//                    body = Json.encodeToString(studentItem.elem)
+//                }
+//            )
+//        },
+//        options = jso {
+//            onSuccess = { _: Any, _: Any, _: Any? ->
+//                queryClient.invalidateQueries<Any>(studentListQueryKey)
+//            }
+//        }
+//    )
 
     if (query.isLoading) div { +"Loading .." }
     else if (query.isError) div { +"Error!" }
@@ -118,9 +112,6 @@ val studentsContainer = FC<StudentsContainerProps>("StudentsContainer") { props 
             students = items
             deleteStudent = {
                 deleteStudentMutation.mutateAsync(it, null)
-            }
-            updateStudent = {
-                updateStudentMutation.mutateAsync(it, null)
             }
         }
     }

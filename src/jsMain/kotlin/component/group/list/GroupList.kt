@@ -1,5 +1,6 @@
-package component.group
+package component.group.list
 
+import component.group.item.CGroupItem
 import react.FC
 import react.Props
 import react.dom.html.ReactHTML.li

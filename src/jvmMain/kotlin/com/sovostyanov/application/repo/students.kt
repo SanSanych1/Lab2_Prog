@@ -3,6 +3,7 @@ package com.sovostyanov.application.repo
 import com.sovostyanov.application.data.Student
 
 val studentsRepo = ListRepo<Student>()
+val menuList = arrayOf("students","groups")
 
 fun createTestData() {
     listOf(

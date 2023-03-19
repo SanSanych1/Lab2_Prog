@@ -2,6 +2,7 @@ package com.sovostyanov.application
 
 import com.sovostyanov.application.repo.createTestData
 import com.sovostyanov.application.rest.groupRoutes
+import com.sovostyanov.application.rest.menuRoutes
 import com.sovostyanov.application.rest.studentRoutes
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
@@ -47,5 +48,6 @@ fun Application.rest() {
     routing {
         groupRoutes()
         studentRoutes()
+        menuRoutes()
     }
 }
