@@ -26,7 +26,7 @@ fun HTML.index() {
             id = "root"
             +"React will be here!!"
         }
-        script(src = "/static/Lab2_Prog.js") {}
+        script(src = "/static/Lab3_Prog.js") {}
     }
 }
 

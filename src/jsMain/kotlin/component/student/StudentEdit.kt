@@ -7,34 +7,37 @@ import react.dom.html.ReactHTML.input
 import react.dom.html.ReactHTML.span
 import react.useRef
 import com.sovostyanov.application.data.Student
+import component.template.EditItemProps
+import react.dom.html.ReactHTML.button
+import react.useState
 import web.html.HTMLInputElement
+import web.html.InputType
 
-external interface EditStudentProps : Props {
-    var oldStudent: Student
-    var saveStudent: (Student) -> Unit
-}
-
-val CEditStudent = FC<EditStudentProps>("Edit student") { props ->
-    val firstnameRef = useRef<HTMLInputElement>()
-    val surnameRef = useRef<HTMLInputElement>()
-
-    input {
-        defaultValue = props.oldStudent.firstname
-        ref = firstnameRef
+val CStudentEdit = FC<EditItemProps<Student>>("StudentEdit") { props ->
+    var firstname by useState(props.item.elem.firstname)
+    var surname by useState(props.item.elem.surname)
+    var group by useState(props.item.elem.group)
+    span {
+        input {
+            type = InputType.text
+            value = firstname
+            onChange = { firstname = it.target.value }
+        }
+        input {
+            type = InputType.text
+            value = surname
+            onChange = {surname = it.target.value }
+        }
+        input {
+            type = InputType.text
+            value = group
+            onChange = {group = it.target.value }
+        }
     }
-    input {
-        defaultValue = props.oldStudent.surname
-        ref = surnameRef
-    }
-
-    ReactHTML.button {
+    button {
         +"✓"
         onClick = {
-            firstnameRef.current?.value?.let { firstname ->
-                surnameRef.current?.value?.let { surname ->
-                    props.saveStudent(Student(firstname, surname, props.oldStudent.group))
-                }
-            }
+            props.saveElement(Student(firstname, surname, group))
         }
     }
 }

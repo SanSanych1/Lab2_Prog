@@ -8,40 +8,37 @@ import react.dom.html.ReactHTML.input
 import react.dom.html.ReactHTML.label
 import react.useRef
 import com.sovostyanov.application.data.Student
+import component.template.EditAddProps
+import react.dom.html.ReactHTML.span
+import react.useState
 import web.html.HTMLInputElement
+import web.html.InputType
 
-external interface AddStudentProps: Props {
-    var addStudent: (Student) -> Unit
-}
-
-val CAddStudent = FC<AddStudentProps>("AddStudent"){ props ->
-    val firstnameRef = useRef<HTMLInputElement>()
-    val surnameRef = useRef<HTMLInputElement>()
-    val groupRef = useRef<HTMLInputElement>()
-    div {
-        div {
-            label { +"firstname " }
-            input { ref = firstnameRef }
+val CStudentAdd = FC<EditAddProps<Student>>("StudentAdd") { props ->
+    var firstname by useState("")
+    var surname by useState("")
+    var group by useState("")
+    span {
+        input {
+            type = InputType.text
+            value = firstname
+            onChange = { firstname = it.target.value }
         }
-        div {
-            label { +"surname " }
-            input { ref = surnameRef }
+        input {
+            type = InputType.text
+            value = surname
+            onChange = { surname = it.target.value }
         }
-        div {
-            label { +"group " }
-            input { ref = groupRef }
+        input {
+            type = InputType.text
+            value = group
+            onChange = { group = it.target.value }
         }
-        button {
-            +"Add"
-            onClick = {
-                firstnameRef.current?.value?.let { firstname ->
-                    surnameRef.current?.value?.let { surname ->
-                        groupRef.current?.value?.let { group ->
-                            props.addStudent(Student(firstname, surname, group))
-                        }
-                    }
-                }
-            }
+    }
+    button {
+        +"✓"
+        onClick = {
+            props.saveElement(Student(firstname, surname, group))
         }
     }
 }

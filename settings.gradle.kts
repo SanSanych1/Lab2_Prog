@@ -1,3 +1,2 @@
-
-rootProject.name = "Lab2_Prog"
+rootProject.name = "Lab3_Prog"
 

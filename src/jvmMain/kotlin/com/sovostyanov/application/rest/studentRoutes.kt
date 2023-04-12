@@ -1,5 +1,6 @@
 package com.sovostyanov.application.rest
 
+import com.sovostyanov.application.common.ItemId
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
@@ -55,6 +56,22 @@ fun Route.studentRoutes() {
                 )
             }
         }
+
+        put {
+            val newStudent = call.receive<Pair<String, ItemId>>()
+            val oldStudent = studentsRepo.read(newStudent.second)?.apply {
+                this.elem.group = newStudent.first
+            }
+
+            if (oldStudent != null) {
+                studentsRepo.update(newStudent.second, oldStudent.elem)
+            }
+            call.respondText(
+                "Student updates correctly",
+                status = HttpStatusCode.Created
+            )
+        }
+
         put("{id}") {
             val id = call.parameters["id"] ?: return@put call.respondText(
                 "Missing or malformed id",

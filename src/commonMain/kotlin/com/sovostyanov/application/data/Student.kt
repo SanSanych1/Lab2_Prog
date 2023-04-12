@@ -9,7 +9,7 @@ import com.sovostyanov.application.common.ItemId
 class Student(
     val firstname: String,
     val surname: String,
-    val group: String
+    var group: String
 ){
     fun fullname() =
         "$firstname $surname"

@@ -6,9 +6,7 @@ import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import com.sovostyanov.application.config.Config
-import com.sovostyanov.application.data.Student
 import com.sovostyanov.application.repo.menuList
-import com.sovostyanov.application.repo.studentsRepo
 
 fun Route.menuRoutes() {
     route(Config.menuPath) {
