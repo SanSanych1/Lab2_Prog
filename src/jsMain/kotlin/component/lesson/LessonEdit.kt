@@ -1,11 +1,5 @@
 package component.lesson
 
-import com.sovostyanov.application.common.Item
-import com.sovostyanov.application.config.Config
-import com.sovostyanov.application.data.Grade
-import com.sovostyanov.application.data.GradeInfo
-import com.sovostyanov.application.data.Lesson
-import com.sovostyanov.application.data.Student
 import component.template.EditItemProps
 import js.core.jso
 import kotlinx.serialization.decodeFromString
@@ -19,6 +13,12 @@ import react.dom.html.ReactHTML.button
 import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.input
 import react.useState
+import com.sovostyanov.application.common.Item
+import com.sovostyanov.application.config.Config
+import com.sovostyanov.application.data.Grade
+import com.sovostyanov.application.data.GradeInfo
+import com.sovostyanov.application.data.Lesson
+import com.sovostyanov.application.data.Student
 import tanstack.query.core.QueryKey
 import tanstack.react.query.useQuery
 import tools.fetchText

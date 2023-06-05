@@ -1,4 +1,4 @@
-package com.sovostyanov.application
+package com.sovostyanov.application.repo
 
 import com.sovostyanov.application.common.Item
 

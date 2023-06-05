@@ -37,7 +37,7 @@ class ApplicationTest : StringSpec({
             val newStudents = withClue("create") {
                 val response = client.post("/students/") {
                     contentType(ContentType.Application.Json)
-                    setBody(Student("Raj", "Koothrappali", "29m").json)
+                    setBody(Student("Raj", "Koothrappali").json)
                 }
                 response.status shouldBe HttpStatusCode.Created
                 Json.decodeFromString<List<Item<Student>>>(
@@ -50,7 +50,7 @@ class ApplicationTest : StringSpec({
                 val raj = newStudents.first { it.elem.firstname == "Raj" }
                 client.put("/students/${raj.id}") {
                     contentType(ContentType.Application.Json)
-                    setBody(Student("Amy", "Fowler",  "29z").json)
+                    setBody(Student("Amy", "Fowler").json)
                 }
                 Json.decodeFromString<Item<Student>>(
                     client.get("/students/${raj.id}").bodyAsText()

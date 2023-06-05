@@ -1,12 +1,12 @@
 package com.sovostyanov.application.rest
 
-import com.sovostyanov.application.config.Config
-import com.sovostyanov.application.repo.lessonsRepo
-import com.sovostyanov.application.repo.studentsRepo
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import com.sovostyanov.application.config.Config
+import com.sovostyanov.application.repo.lessonsRepo
+import com.sovostyanov.application.repo.studentsRepo
 
 fun Route.lessonRoutes() {
     route(Config.lessonsPath) {

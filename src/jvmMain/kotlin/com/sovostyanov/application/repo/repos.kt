@@ -4,18 +4,17 @@ import com.sovostyanov.application.data.Grade
 import com.sovostyanov.application.data.GradeInfo
 import com.sovostyanov.application.data.Lesson
 import com.sovostyanov.application.data.Student
-import com.sovostyanov.application.repo.ListRepo
 
 val studentsRepo = ListRepo<Student>()
 val lessonsRepo = ListRepo<Lesson>()
 
-val menuList = listOf("students","lessons","groups")
+
 fun createTestData() {
     listOf(
-        Student("Sheldon", "Cooper","29m"),
-        Student("Leonard", "Hofstadter","20z"),
-        Student("Howard", "Wolowitz","29m"),
-        Student("Penny", "Hofstadter","20m"),
+        Student("Sheldon", "Cooper"),
+        Student("Leonard", "Hofstadter"),
+        Student("Howard", "Wolowitz"),
+        Student("Penny", "Hofstadter"),
     ).apply {
         map {
             studentsRepo.create(it)

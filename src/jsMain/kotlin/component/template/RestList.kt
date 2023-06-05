@@ -1,6 +1,5 @@
 package component.template
 
-import com.sovostyanov.application.common.Item
 import react.FC
 import react.Props
 import react.dom.html.ReactHTML
@@ -8,6 +7,9 @@ import react.dom.html.ReactHTML.li
 import react.dom.html.ReactHTML.ol
 import react.dom.html.ReactHTML.span
 import react.useState
+import com.sovostyanov.application.common.Item
+import com.sovostyanov.application.config.Config
+import react.router.dom.Link
 
 external interface ElementInListProps<E> : Props {
     var element: E
@@ -42,9 +44,13 @@ inline fun <reified E : Any> restList(
     ol {
         props.items.forEachIndexed { index, item ->
             li {
-                cElementInList {
-                    element = item.elem
+                Link{
+                    to = "${item.id}/lessons/"
+                    cElementInList {
+                        element = item.elem
+                    }
                 }
+
                 span {
                     +" ✂ "
                     onClick = {

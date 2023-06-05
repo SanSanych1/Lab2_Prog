@@ -1,10 +1,5 @@
 package component.lesson
 
-import com.sovostyanov.application.common.Item
-import com.sovostyanov.application.config.Config
-import com.sovostyanov.application.data.Lesson
-import com.sovostyanov.application.data.Student
-import com.sovostyanov.application.data.StudentId
 import invalidateRepoKey
 import js.core.jso
 import kotlinx.serialization.decodeFromString
@@ -16,6 +11,11 @@ import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.input
 import react.dom.html.ReactHTML.option
 import react.dom.html.ReactHTML.select
+import com.sovostyanov.application.common.Item
+import com.sovostyanov.application.config.Config
+import com.sovostyanov.application.data.Lesson
+import com.sovostyanov.application.data.Student
+import com.sovostyanov.application.data.StudentId
 import tanstack.query.core.QueryKey
 import tanstack.react.query.useMutation
 import tanstack.react.query.useQuery

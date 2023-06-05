@@ -8,12 +8,10 @@ import com.sovostyanov.application.common.ItemId
 @Serializable
 class Student(
     val firstname: String,
-    val surname: String,
-    var group: String
+    val surname: String
 ){
     fun fullname() =
         "$firstname $surname"
-
 }
 
 typealias StudentId = ItemId
